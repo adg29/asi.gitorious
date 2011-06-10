@@ -25,6 +25,11 @@ Rails::Initializer.run do |config|
   gitorious_yaml = YAML.load_file(File.join(RAILS_ROOT, "config/gitorious.yml"))[RAILS_ENV]
   raise "Your config/gitorious.yml does not have an entry for your current Rails environment. Please consult config/gitorious.sample.yml for instructions." unless gitorious_yaml
 
+# GPdev add middleware for uploadify
+%w(middleware).each do |dir|
+  config.load_paths << "#{RAILS_ROOT}/app/#{dir}"
+end
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
