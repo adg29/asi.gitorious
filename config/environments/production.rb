@@ -2,19 +2,19 @@
 
 # The production environment is meant for finished, "live" apps.
 # Code is not reloaded between requests
-config.cache_classes = true
-config.action_view.cache_template_loading = true
+config.cache_classes = false 
+config.action_view.cache_template_loading = false 
 
 # Use a different logger for distributed setups
 # config.logger = SyslogLogger.new
 
 # require 'hodel_3000_compliant_logger'
 # config.logger = Hodel3000CompliantLogger.new(config.log_path)
-config.log_level = :warn
+config.log_level = :debug
 
 # Full error reports are disabled and caching is turned on
-config.action_controller.consider_all_requests_local = false
-config.action_controller.perform_caching             = true
+config.action_controller.consider_all_requests_local = true 
+config.action_controller.perform_caching             = false 
 
 cache_dir = File.expand_path(File.join(RAILS_ROOT, 'public', 'cache'))
 
