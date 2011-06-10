@@ -29,6 +29,14 @@
 # =========================================================================
 
 ActionController::Routing::Routes.draw do |map|
+  map.resources :proposal_uploads
+
+  map.resources :ideas
+
+  #GPdev
+  map.resources :proposals
+  map.connect 'proposals/start', :controller => 'proposals', :action => 'start'
+
   VALID_REF = /[a-zA-Z0-9~\{\}\+\^\.\-_\/]+/
 
   # Builds up the common repository sub-routes that's shared between projects
@@ -137,11 +145,12 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
 
+
   map.resources :projects, :member => {
     :confirm_delete => :get,
     :preview => :put,
     :edit_slug => :any,
-    :clones => :get
+    :clones => :get,
   } do |projects|
     projects.resources :pages, :member => { :history => :get,:preview => :put}, :collection => { :git_access => :get }
     projects.resources(:repositories, repository_options){|r| build_repository_routes(r) }
@@ -180,6 +189,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action/:id'
+
 
   # See the routing_filter plugin and lib/route_filters/*
   map.filter "repository_owner_namespacing", :file => "route_filters/repository_owner_namespacing"
