@@ -511,6 +511,9 @@ module ApplicationHelper
 
     scripts = jquery + ["core_extensions"] + gitorious + ["application"]
 
+    # GPDEV want to do this only for certain pages
+    scripts += ['/json2','/underscore','/backbone'].collect { |f| "lib#{f}" }
+
     javascript_include_tag(scripts, :cache => true)
   end
 
