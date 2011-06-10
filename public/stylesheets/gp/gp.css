@@ -1,0 +1,31 @@
+.display_none{
+  display: none;
+}
+.display_block{
+  display: block;
+}
+
+input[type=button].disabled{
+	background-color: #ccc;
+	color: #bbb;
+}
+input[type=button]{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	font-weight: bold;
+	color: #924800;
+	font-size: 13px;
+	text-shadow: 0px 1px #ffc59b;
+	padding: 6px 10px 7px;
+	display: block;
+	line-height: 20px;
+	height: 33px;
+	margin-right: 5px;
+	margin-bottom: 1px;
+	-webkit-box-shadow: 0px 1px 0px #ffc59b inset;
+	-moz-box-shadow: inset 0px 1px 0px #ffc59b;
+	background-color: #ffb063;
+	border: 1px solid #ce7219;
+	cursor: pointer;
+}
+

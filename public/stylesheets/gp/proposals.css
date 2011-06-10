@@ -1,0 +1,10 @@
+ol{
+  height: 300px;
+}
+label[for=proposal_terms_accepted]{
+}
+
+.gp_step_hide{
+  display: none;
+}
+
