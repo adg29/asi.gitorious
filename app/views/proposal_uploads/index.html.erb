@@ -1,0 +1,24 @@
+<h1>Listing proposal_uploads</h1>
+
+<table>
+  <tr>
+    <th>File name</th>
+    <th>Content type</th>
+    <th>File size</th>
+  </tr>
+
+<% @proposal_uploads.each do |proposal_upload| %>
+  <tr>
+    <td><%=h proposal_upload.file_name %></td>
+    <td><%=h proposal_upload.content_type %></td>
+    <td><%=h proposal_upload.file_size %></td>
+    <td><%= link_to 'Show', proposal_upload %></td>
+    <td><%= link_to 'Edit', edit_proposal_upload_path(proposal_upload) %></td>
+    <td><%= link_to 'Destroy', proposal_upload, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New proposal_upload', new_proposal_upload_path %>

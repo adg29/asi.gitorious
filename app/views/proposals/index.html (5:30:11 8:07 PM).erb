@@ -1,0 +1,40 @@
+<% content_for :extra_head do -%>
+    <%= javascript_include_tag("gp/proposals", :cache => true) %>
+<% end %>
+
+<h1>Listing proposals</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Owner</th>
+    <th>Owner type</th>
+    <th>Rewards</th>
+    <th>Url</th>
+    <th>Terms accepted</th>
+    <th>Status</th>
+    <th>Notes</th>
+    <th>Submissions</th>
+  </tr>
+
+<% @proposals.each do |proposal| %>
+  <tr>
+    <td><%=h proposal.description %></td>
+    <td><%=h proposal.owner_id %></td>
+    <td><%=h proposal.owner_type %></td>
+    <td><%=h proposal.rewards %></td>
+    <td><%=h proposal.url %></td>
+    <td><%=h proposal.terms_accepted %></td>
+    <td><%=h proposal.status %></td>
+    <td><%=h proposal.notes %></td>
+    <td><%=h proposal.submissions %></td>
+    <td><%= link_to 'Show', proposal %></td>
+    <td><%= link_to 'Edit', edit_proposal_path(proposal) %></td>
+    <td><%= link_to 'Destroy', proposal, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New proposal', new_proposal_path %>

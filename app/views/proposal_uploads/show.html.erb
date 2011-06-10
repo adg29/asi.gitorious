@@ -1,0 +1,18 @@
+<p>
+  <b>File name:</b>
+  <%=h @proposal_upload.upload_file_name %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%=h @proposal_upload.upload_content_type %>
+</p>
+
+<p>
+  <b>File size:</b>
+  <%=h @proposal_upload.upload_file_size %>
+</p>
+
+
+<%= link_to 'Edit', edit_proposal_upload_path(@proposal_upload) %> |
+<%= link_to 'Back', proposal_uploads_path %>

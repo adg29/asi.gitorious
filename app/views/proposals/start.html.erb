@@ -1,0 +1,71 @@
+<%
+#--
+#   Copyright (C) 2009 Nokia Corporation and/or its subsidiary(-ies)
+#   Copyright (C) 2007, 2008 Johan Sørensen <johan@johansorensen.com>
+#   Copyright (C) 2008 Tor Arne Vestbø <tavestbo@trolltech.com>
+#   Copyright (C) 2009 Fabio Akita <fabio.akita@gmail.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Affero General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Affero General Public License for more details.
+#
+#   You should have received a copy of the GNU Affero General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#++
+%>
+
+
+<h1>New proposal</h1>
+
+<% form_for(@proposal) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :owner_id %><br />
+    <%= f.text_field :owner_id %>
+  </p>
+  <p>
+    <%= f.label :owner_type %><br />
+    <%= f.text_field :owner_type %>
+  </p>
+  <p>
+    <%= f.label :rewards %><br />
+    <%= f.text_area :rewards %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :terms_accepted %><br />
+    <%= f.check_box :terms_accepted %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>
+  </p>
+  <p>
+    <%= f.label :submissions %><br />
+    <%= f.text_field :submissions %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', proposals_path %>
+

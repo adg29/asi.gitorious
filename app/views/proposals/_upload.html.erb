@@ -1,0 +1,117 @@
+<% 
+dialog_file_description = 'Proposal Uploads'
+allowed_extensions = [:jpg, :jpeg, :gif, :png, :pdf] 
+max_size = 20.megabyte
+allow_multiple_files = true
+url = proposal_uploads_path
+upload_field = '#proposal_upload_upload'
+%>
+<%- session_key_name = ActionController::Base.session_options[:key] -%>
+<% content_for :extra_head do -%>
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
+<%= javascript_include_tag("gp/uploadify/swfobject.js", :cache => true) %>
+<%= javascript_include_tag("gp/uploadify/jquery.uploadify.v2.1.4", :cache => true) %>
+<%= stylesheet_link_tag 'gp/uploadify/uploadify' %>
+<script type="text/javascript">
+<% if protect_against_forgery? -%>
+var AUTH_TOKEN = '<%= form_authenticity_token %>';
+<% end -%>
+
+$(document).ready(function() {
+
+  $('<%= upload_field %>').uploadify({
+    uploader      : '/javascripts/gp/uploadify/uploadify-gp.swf',
+    script        : '/proposal_uploads/create',
+    fileDataName  : $('#file_uploader input:file')[0].name, // Extract correct name of upload field from form field
+    cancelImg     : '/javascripts/gp/uploadify/cancel.png',
+    buttonText    : 'Browse',
+    //buttonImg     : '/images/browse-background.png',    
+    fileDesc      : '<%= dialog_file_description %> (<%= allowed_extensions.collect { |ext| "*.#{ext}" }.join(';') %>)',
+    fileExt       : '<%= allowed_extensions.collect { |ext| "*.#{ext}" }.join(';') %>',
+    sizeLimit     : <%= max_size %>,    
+    multi         : <%= allow_multiple_files %>,
+    onError       : function(event, ID, fileObj, errorObj){
+                  console.log('Error event');
+                  console.log('event');
+                  console.log(event);
+                  console.log('ID');
+                  console.log(ID);
+                  console.log('fileObj');
+                  console.log(fileObj);
+                  console.log('errorObj');
+                  console.log(errorObj);
+    },
+    onOpen        : function(event,ID,fileObj){
+                  /*
+                  console.log('File is opened for upload');
+                  console.log('event');
+                  console.log(event);
+                  console.log('ID');
+                  console.log(ID);
+                  console.log('fileObj');
+                  console.log(fileObj);
+                  */
+    },
+    onComplete    : function(event, queueID, fileObj, response, data) { 
+                  console.log('File upload complete');
+                  console.log('response');
+                  console.log(response);
+                  console.log('data');
+                  console.log(data);
+                  var data = eval('(' + response + ')');
+                  console.log('get');
+                  console.log(data.file);
+                  $.getScript(data.file)
+    },
+    onAllComplete : function(event, data){
+      $('#uploadify_cancel').hide('blind');
+      $('#uploadify_submit').show('blind');      
+    },
+    onSelect: function(event, queueID, fileObj){
+      if (fileObj.size > <%= max_size %>) {
+        alert('The file ' + fileObj.name + ' is too large.')
+        return false;
+      }
+    },  
+    scriptData  : {
+        'format': 'json', 
+        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
+        'authenticity_token'  : encodeURIComponent('<%= u form_authenticity_token if protect_against_forgery? %>')
+    }    
+  });
+  
+  $('#uploadify_submit').click(function(event){
+    event.preventDefault();
+    $('<%= upload_field %>').uploadifyUpload();
+    $('#uploadify_submit').hide();
+    $('#uploadify_cancel').show();
+  });
+
+  $('#uploadify_cancel').click(function(event){
+    event.preventDefault();
+    $('<%= upload_field %>').uploadifyClearQueue();
+    $('#uploadify_cancel').hide();
+    $('#uploadify_submit').show();
+  });
+  
+  
+});
+
+</script>
+<% end -%>
+<div id="proposal_upload_files">
+
+</div>
+<% form_for(:proposal_upload, :id => 'file_upload', :html => { :multipart => true}) do |uf| %>
+  <% if protect_against_forgery? -%>
+  <%= uf.hidden_field :authenticity_token, :value => (u form_authenticity_token) -%>
+  <% end -%>
+  <%= uf.error_messages %>
+  <div id="file_uploader">
+  <%= uf.file_field :upload %>
+  </div>
+  <div id="upload_submit">
+    <a href="#" class="button" id="uploadify_submit">Upload</a><a href="#" id="uploadify_cancel" style="display:none">Cancel</a>
+  </div>
+<% end %>
+

@@ -1,0 +1,48 @@
+<p>
+  <b>Description:</b>
+  <%=h @proposal.description %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%=h @proposal.owner_id %>
+</p>
+
+<p>
+  <b>Owner type:</b>
+  <%=h @proposal.owner_type %>
+</p>
+
+<p>
+  <b>Rewards:</b>
+  <%=h @proposal.rewards %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @proposal.url %>
+</p>
+
+<p>
+  <b>Terms accepted:</b>
+  <%=h @proposal.terms_accepted %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @proposal.status %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @proposal.notes %>
+</p>
+
+<p>
+  <b>Submissions:</b>
+  <%=h @proposal.submissions %>
+</p>
+
+
+<%= link_to 'Edit', edit_proposal_path(@proposal) %> |
+<%= link_to 'Back', proposals_path %>
