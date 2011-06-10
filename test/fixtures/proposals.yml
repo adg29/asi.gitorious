@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyText
+  owner_id: 1
+  owner_type: MyString
+  rewards: MyText
+  url: MyString
+  terms_accepted: false
+  status: MyString
+  notes: MyText
+  submissions: 1
+
+two:
+  description: MyText
+  owner_id: 1
+  owner_type: MyString
+  rewards: MyText
+  url: MyString
+  terms_accepted: false
+  status: MyString
+  notes: MyText
+  submissions: 1
